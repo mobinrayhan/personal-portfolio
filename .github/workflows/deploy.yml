@@ -4,25 +4,17 @@ on:
     branches:
       - main
 jobs:
-  print_hello_world:
-    name: Print Hello world
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Debug SSH private key length
-        run: |
-          echo "SSH_PRIVATE_KEY_LENGTH=$(echo -n "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c)"
-
-      - name: Test SSH connection
-        run: |
-          ssh -v -o StrictHostKeyChecking=no -i "${{ secrets.SSH_PRIVATE_KEY }}" "${{ secrets.VPS_USERNAME }}"@"${{ secrets.VPS_IP }}" "ls -la"
-
-      - name: Set up SSH Key and See All Vps Files
-        uses: appleboy/ssh-action@master
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.VPS_IP }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd /www/wwwroot/soundei/frontend
-            ls -la
+            whoami
