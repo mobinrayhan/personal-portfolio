@@ -32,7 +32,9 @@ jobs:
             cd frontend
             git clone https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/mobinrayhan/personal-portfolio.git .
             ls -la
-            npm install
+            su - username
+            node -v
+            npm -v
 
   # Deploy:
   #   runs-on: ubuntu-latest
