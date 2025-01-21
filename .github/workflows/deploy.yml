@@ -27,10 +27,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            if [ -d "frontend" ]; then
-              echo "Directory 'frontend' exists. Deleting it..."
-              rm -rf frontend
-
             echo "Creating 'frontend' directory..."
             mkdir frontend
             cd frontend
