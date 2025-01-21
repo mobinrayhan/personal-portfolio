@@ -12,6 +12,10 @@ jobs:
         run: |
           echo "SSH_PRIVATE_KEY_LENGTH=$(echo -n "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c)"
 
+      - name: Test SSH connection
+        run: |
+          ssh -v -o StrictHostKeyChecking=no -i "${{ secrets.SSH_PRIVATE_KEY }}" "${{ secrets.VPS_USERNAME }}"@"${{ secrets.VPS_IP }}" "ls -la"
+
       - name: Set up SSH Key and See All Vps Files
         uses: appleboy/ssh-action@master
         with:
