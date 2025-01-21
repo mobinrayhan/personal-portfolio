@@ -40,9 +40,7 @@ jobs:
             mkdir "$DIR"  # Creates the directory
             cd "$DIR"
 
-            echo "Creating 'frontend' directory..."
-            mkdir -p frontend
-            cd frontend
+
 
             git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/mobinrayhan/personal-portfolio.git .
 
