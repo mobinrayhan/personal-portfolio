@@ -12,6 +12,11 @@ jobs:
         uses: "actions/checkout@v2"
         with:
           ref: main
+
+      - name: Download Decencies
+        run: |
+          npm ci
+
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v0.1.10
         with:
