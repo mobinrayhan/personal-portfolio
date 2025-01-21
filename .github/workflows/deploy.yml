@@ -41,7 +41,7 @@ jobs:
 
             npm ci
             npm run build
-            npm run start
+            pm2 restart mobin_front
             rm -rf .github/
             rm -rf .git/
 
