@@ -32,15 +32,8 @@ jobs:
             cd frontend
             git clone https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/mobinrayhan/personal-portfolio.git .
 
-            export PATH=/usr/local/bin:$PATH
-
-            # Verify Node.js and npm versions for debugging
-            node -v
-            npm -v
-
-            # Install dependencies and build the project
-            npm install
-            npm run build
+            which node
+            which npm
   # Deploy:
   #   runs-on: ubuntu-latest
   #   needs: upload_files
