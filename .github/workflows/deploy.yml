@@ -28,6 +28,9 @@ jobs:
           script: |
             whoami
             ls -al
+
+            node -v
+            npm -v
   # Deploy:
   # Deploy:
   #   runs-on: ubuntu-latest
