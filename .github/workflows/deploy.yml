@@ -31,6 +31,14 @@ jobs:
             mkdir frontend
             cd frontend
             git clone https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/mobinrayhan/personal-portfolio.git .
+            if ! command -v node &> /dev/null; then
+              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+              source ~/.bashrc
+              nvm install --lts
+            fi
+            ls -la
+            npm install
+            npm run build
             ls -la
   # Deploy:
   #   runs-on: ubuntu-latest
