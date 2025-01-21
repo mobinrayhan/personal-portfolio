@@ -31,12 +31,8 @@ jobs:
             mkdir frontend
             cd frontend
             git clone https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/mobinrayhan/personal-portfolio.git .
-            # rm -rf .git 
-            # rm -rf .github
-            npm ci
-            npm --version
-            npm run build
-            npm start
+            ls -la
+
   # Deploy:
   #   runs-on: ubuntu-latest
   #   needs: upload_files
@@ -52,3 +48,9 @@ jobs:
   #         npm run build
   #         npm start
   #         ls -la
+  # rm -rf .git
+  # rm -rf .github
+  # npm ci
+  # npm --version
+  # npm run build
+  # npm start
