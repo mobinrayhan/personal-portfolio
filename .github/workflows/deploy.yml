@@ -17,22 +17,21 @@ jobs:
       #   run: |
       #     npm ci
 
-      - name: Deploy and build project on VPS
+      - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
+          key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd /www/www***/mobin
+            cd /www/wwwroot/mobin
             rm -rf frontend
             mkdir frontend
             cd frontend
-            git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/mobinrayhan/personal-portfolio.git .
-            # npm install
-            # npm run build
-
+            git clone https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/mobinrayhan/personal-portfolio.git .
+            ls -la
   # Deploy:
   #   runs-on: ubuntu-latest
   #   needs: upload_files
