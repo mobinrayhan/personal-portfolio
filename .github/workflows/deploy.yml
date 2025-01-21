@@ -8,6 +8,10 @@ jobs:
     name: Print Hello world
     runs-on: ubuntu-latest
     steps:
+      - name: Debug SSH private key length
+        run: |
+          echo "SSH_PRIVATE_KEY_LENGTH=$(echo -n "${{ secrets.SSH_PRIVATE_KEY }}" | wc -c)"
+
       - name: Set up SSH Key and See All Vps Files
         uses: appleboy/ssh-action@master
         with:
