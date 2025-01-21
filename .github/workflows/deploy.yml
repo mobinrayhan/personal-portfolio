@@ -26,11 +26,13 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            whoami
-            ls -al
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh                
-            npm install
+            set -x
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 16
+            nvm use 16
+            node -v
+            npm -v
 
   # Deploy:
   # Deploy:
