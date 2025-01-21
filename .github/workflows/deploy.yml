@@ -23,15 +23,30 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
+
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            set -x
+            if [ -d "frontend" ]; then
+              echo "Directory 'frontend' exists. Deleting it..."
+              rm -rf frontend
+
+            echo "Creating 'frontend' directory..."
+            mkdir frontend
+            cd frontend
+
+            git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/mobinrayhan/personal-portfolio.git .
+
             export NVM_DIR="$HOME/.nvm"
-            nvm install 16
-            nvm use 16
-            node -v
-            npm -v
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm install 22
+            nvm use 22
+
+            npm ci
+            npm run build
+            npm run start
+            rm -rf .github/
+            rm -rf .git/
 
   # Deploy:
   # Deploy:
