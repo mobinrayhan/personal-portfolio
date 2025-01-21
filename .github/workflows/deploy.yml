@@ -17,4 +17,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            whoami
+            cd /www/wwwroot/soundei/frontend
+            ls -la
