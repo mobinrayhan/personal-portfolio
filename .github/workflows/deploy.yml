@@ -28,6 +28,18 @@ jobs:
           port: 22
           script: |
             cd /www/wwwroot/mobin
+            DIR="frontend"
+
+            if [ -d "$DIR" ]; then
+                echo "'$DIR' directory already exists. Deleting it..."
+                rm -rf "$DIR"  # Deletes the directory
+                echo "'$DIR' directory deleted."
+            fi
+
+            echo "Creating '$DIR' directory..."
+            mkdir "$DIR"  # Creates the directory
+            cd "$DIR"
+
             echo "Creating 'frontend' directory..."
             mkdir -p frontend
             cd frontend
