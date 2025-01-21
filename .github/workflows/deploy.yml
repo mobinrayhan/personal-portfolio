@@ -34,14 +34,10 @@ jobs:
 
             git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/mobinrayhan/personal-portfolio.git .
 
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-            nvm install 22
-            nvm use 22
-
             export PATH=$PATH:/www/server/nvm/versions/node/v22.13.0/bin # Add pm2 to PATH
-            pm2 -v || echo "pm2 is not found in PATH"
+            export PATH=$PATH:/www/server/nvm/versions/node/v22.13.0/bin # Add pm2 to PATH
 
+            pm2 -v || echo "pm2 is not found in PATH"
             npm ci
             npm run build
 
