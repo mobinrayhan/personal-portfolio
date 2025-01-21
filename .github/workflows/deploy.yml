@@ -1,0 +1,12 @@
+name: Auto Deploy In VPS After Push It Production
+on:
+  push:
+    branches:
+      - main
+jobs:
+  print_hello_world:
+    name: Print Hello world
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Hello world
+        run: "echo Hello world from personal mobin web"
