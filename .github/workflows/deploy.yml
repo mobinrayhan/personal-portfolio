@@ -18,39 +18,38 @@ jobs:
       #     npm ci
 
       - name: Deploy and build project on VPS
-      uses: appleboy/ssh-action@v0.1.10
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        password: ${{ secrets.SSH_PASSWORD }}
-        port: 22
-        script: |
-          # Navigate to project directory
-          cd /www/www***/mobin
-    
-          # Clean up old files and create a new directory
-          rm -rf frontend
-          mkdir frontend
-          cd frontend
-    
-          # Clone the repository
-          git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/mobinrayhan/personal-portfolio.git .
-    
-          # Check if Node.js and npm are installed
-          if ! command -v node &> /dev/null; then
-            echo "Node.js not found. Installing..."
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-            source ~/.bashrc
-            nvm install --lts
-          fi
-    
-          # Ensure npm is in PATH
-          export PATH=$PATH:/usr/local/bin
-    
-          # Install dependencies and build the project
-          npm install
-          npm run build
-    
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: 22
+          script: |
+            # Navigate to project directory
+            cd /www/www***/mobin
+
+            # Clean up old files and create a new directory
+            rm -rf frontend
+            mkdir frontend
+            cd frontend
+
+            # Clone the repository
+            git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/mobinrayhan/personal-portfolio.git .
+
+            # Check if Node.js and npm are installed
+            if ! command -v node &> /dev/null; then
+              echo "Node.js not found. Installing..."
+              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+              source ~/.bashrc
+              nvm install --lts
+            fi
+
+            # Ensure npm is in PATH
+            export PATH=$PATH:/usr/local/bin
+
+            # Install dependencies and build the project
+            npm install
+            npm run build
 
   # Deploy:
   #   runs-on: ubuntu-latest
