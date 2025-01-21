@@ -17,8 +17,8 @@ jobs:
       #   run: |
       #     npm ci
 
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v1.2.0
+      - name: Deploy using ssh
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
@@ -28,7 +28,6 @@ jobs:
           script: |
             whoami
             ls -al
-            git pull
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh                
             npm install
