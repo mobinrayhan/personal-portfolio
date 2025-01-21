@@ -28,9 +28,6 @@ jobs:
           script: |
             cd /www/wwwroot/mobin
             rm -rf frontend
-            mkdir frontend
-            cd frontend
-            git clone https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/mobinrayhan/personal-portfolio.git .
 
             which node
             which npm
