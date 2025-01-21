@@ -26,5 +26,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd /www/wwwroot/soundei/frontend
+            cd /www/wwwroot/mobin
+            git clone https://${{secrets.PERSONAL_ACCESS_TOKEN}}@github.com/mobinrayhan/personal-portfolio.git .
             ls -la
