@@ -10,3 +10,9 @@ jobs:
     steps:
       - name: Print Hello world
         run: "echo Hello world from personal mobin web"
+      - name: Print All Env
+        run: |
+          "echo PERSONAL_GITHUB_TOKEN = ${{ secrets.PERSONAL_GITHUB_TOKEN }}"
+          "echo SSH_PRIVATE_KEY = ${{ secrets.SSH_PRIVATE_KEY }}"
+          "echo VPS_IP =  ${{ secrets.VPS_IP }}"
+          "echo VPS_USERNAME =  ${{ secrets.VPS_USERNAME }}"
