@@ -26,14 +26,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            export NVM_DIR=~/.nvm
-            source ~/.nvm/nvm.sh
-            npm --help
-
-            which node
-            which npm
-            node -v
-            npm -v
+            whoami
+            ls -al
   # Deploy:
   # Deploy:
   #   runs-on: ubuntu-latest
