@@ -27,6 +27,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
+            cd /www/wwwroot/mobin
             echo "Creating 'frontend' directory..."
             mkdir frontend
             cd frontend
