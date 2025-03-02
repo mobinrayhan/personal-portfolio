@@ -5,7 +5,7 @@ export default function Home() {
     <main className="bg-gray-900 h-screen flex items-center justify-center">
       <div className="text-center p-6 bg-gray-800 shadow-lg rounded-lg">
         <h1 className="text-4xl font-bold text-white mb-4">
-          Hi, I&apos;m Mobin! FROM VPS
+          Hi, I&apos;m Mobin!
         </h1>
         <p className="text-lg text-gray-300 mb-6">
           Welcome to my personal website. I’m currently working on something
