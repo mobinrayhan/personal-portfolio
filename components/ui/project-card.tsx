@@ -23,7 +23,10 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
       {/* Image */}
       <div className="relative h-48 overflow-hidden bg-muted">
         <Image
-          src={`https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop`}
+          src={
+            project.imagePath ||
+            `https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop`
+          }
           alt={project.title}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -42,14 +45,18 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
         {/* Action Buttons */}
         <div className="absolute bottom-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           {project.liveUrl && (
-            <Button size="sm" className="btn-electric">
-              <ExternalLink className="h-3 w-3" />
-            </Button>
+            <Link href={project.liveUrl} target="_blank">
+              <Button size="sm" className="btn-electric">
+                <ExternalLink className="h-3 w-3" />
+              </Button>
+            </Link>
           )}
           {project.githubUrl && (
-            <Button size="sm" variant="secondary">
-              <Github className="h-3 w-3" />
-            </Button>
+            <Link href={project.githubUrl} target="_blank">
+              <Button size="sm" variant="secondary">
+                <Github className="h-3 w-3" />
+              </Button>
+            </Link>
           )}
         </div>
       </div>

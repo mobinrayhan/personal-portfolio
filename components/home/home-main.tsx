@@ -10,11 +10,6 @@ import { motion } from "framer-motion";
 import { ArrowRight, Download } from "lucide-react";
 import Link from "next/link";
 
-// export const metadata: Metadata = {
-//   title: "Home",
-//   description: heroData.subtitle,
-// };
-
 function AnimatedSection({
   children,
   delay = 0,

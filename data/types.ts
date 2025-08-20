@@ -53,12 +53,12 @@ export interface Project {
   description: string;
   longDescription: string;
   technologies: string[];
-  category: string;
+  category: string[];
   featured: boolean;
   imagePath: string;
   githubUrl?: string;
   liveUrl?: string;
-  status: 'completed' | 'in-progress' | 'planned';
+  status: "completed" | "in-progress" | "planned";
 }
 
 export interface ProjectsData {
@@ -75,7 +75,7 @@ export interface Experience {
   achievements: string[];
   technologies: string[];
   location: string;
-  companyLink: string,
+  companyLink: string;
 }
 
 export interface ExperienceData {

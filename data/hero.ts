@@ -8,8 +8,9 @@ export const heroData: HeroData = {
   ctaText: "View My Work",
   ctaLink: "/projects",
   featuredProjectIds: [
-    "ecommerce-platform",
-    "task-manager",
+    "editors-academy",
+    "renix-care",
     "portfolio-website",
+    "nirog-kids-mobile-app",
   ],
 };

@@ -109,7 +109,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             <div className="space-y-4 pt-6 border-t border-border">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Tag className="w-4 h-4" />
-                <span>Category: {project.category}</span>
+                <span>Category: {project.category.join(", ")}</span>
               </div>
 
               <div>
@@ -129,7 +129,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           <div className="relative">
             <div className="aspect-video relative overflow-hidden rounded-xl bg-muted shadow-2xl">
               <Image
-                src={`https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&w=1200&h=675&fit=crop`}
+                src={project.imagePath}
                 alt={project.title}
                 fill
                 className="object-cover"

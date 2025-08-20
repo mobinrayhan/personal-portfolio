@@ -6,7 +6,7 @@ import { projectsData } from "@/data/projects";
 import { Filter } from "lucide-react";
 import { useMemo, useState } from "react";
 
-const filters = ["All", "Web Development", "Mobile Development", "Portfolio"];
+const filters = ["All", "Web Application", "Mobile Application", "Portfolio"];
 
 export default function ProjectMain() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -15,8 +15,8 @@ export default function ProjectMain() {
     if (activeFilter === "All") {
       return projectsData.projects;
     }
-    return projectsData.projects.filter(
-      (project) => project.category === activeFilter
+    return projectsData.projects.filter((project) =>
+      project.category.includes(activeFilter)
     );
   }, [activeFilter]);
 
