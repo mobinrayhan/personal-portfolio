@@ -1,46 +1,44 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Geist } from "next/font/google"
-import { Manrope } from "next/font/google"
-import { Navbar } from "@/components/navbar"
-import { Footer } from "@/components/footer"
-import { ThemeProvider } from "@/components/theme-provider"
-import "./globals.css"
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { ThemeProvider } from '@/providers/theme-provider';
+import { Navbar } from '@/components/layout/navbar';
+import { Footer } from '@/components/layout/footer';
+import { siteData } from '@/data/site';
 
-const geist = Geist({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-geist",
-})
-
-const manrope = Manrope({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-manrope",
-})
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Developer Portfolio",
-    template: "%s | Developer Portfolio",
+    default: siteData.name,
+    template: `%s | ${siteData.name}`,
   },
-  description: "Modern developer portfolio showcasing skills and projects with elegant design",
-  keywords: ["developer", "portfolio", "web development", "react", "nextjs", "typescript"],
-  authors: [{ name: "Alex Developer" }], // TODO: Replace with your name
-  creator: "Alex Developer", // TODO: Replace with your name
+  description: siteData.description,
+  keywords: ['full stack developer', 'web developer', 'react', 'next.js', 'typescript'],
+  authors: [{ name: siteData.name }],
+  creator: siteData.name,
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://your-portfolio.com", // TODO: Replace with your domain
-    title: "Developer Portfolio",
-    description: "Modern developer portfolio showcasing skills and projects",
-    siteName: "Developer Portfolio",
+    type: 'website',
+    locale: 'en_US',
+    url: siteData.url,
+    title: siteData.name,
+    description: siteData.description,
+    siteName: siteData.name,
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: siteData.name,
+      },
+    ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Developer Portfolio",
-    description: "Modern developer portfolio showcasing skills and projects",
-    creator: "@yourusername", // TODO: Replace with your Twitter handle
+    card: 'summary_large_image',
+    title: siteData.name,
+    description: siteData.description,
+    images: ['/images/og-image.jpg'],
+    creator: '@alexjohnson',
   },
   robots: {
     index: true,
@@ -48,23 +46,27 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
     },
   },
-    generator: 'v0.app'
-}
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en" className={`${geist.variable} ${manrope.variable} antialiased`} suppressHydrationWarning>
-      <body className="min-h-screen bg-background text-foreground">
-        <ThemeProvider>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="canonical" href={siteData.url} />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#3b82f6" />
+      </head>
+      <body className={inter.className}>
+        <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
           <div className="relative flex min-h-screen flex-col">
             <Navbar />
             <main className="flex-1">{children}</main>
@@ -73,5 +75,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

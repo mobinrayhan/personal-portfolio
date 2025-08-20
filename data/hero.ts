@@ -1,13 +1,15 @@
-import type { HeroData } from "./types"
+import { HeroData } from "./types";
 
 export const heroData: HeroData = {
-  name: "Alex Developer", // TODO: Replace with your name
-  title: "Full-Stack Developer",
+  name: "Mobin",
+  title: "Full Stack Developer & Mobile App Developer",
   subtitle:
-    "I build modern web applications with React, Next.js, and Node.js. Passionate about creating efficient, scalable solutions that solve real-world problems.",
-  cta: {
-    text: "View My Work",
-    href: "/projects",
-  },
-  featuredProjectIds: ["project-1", "project-2", "project-3"],
-}
+    "I craft exceptional digital experiences with modern web technologies, focusing on performance, accessibility, and beautiful user interfaces.",
+  ctaText: "View My Work",
+  ctaLink: "/projects",
+  featuredProjectIds: [
+    "ecommerce-platform",
+    "task-manager",
+    "portfolio-website",
+  ],
+};

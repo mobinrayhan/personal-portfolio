@@ -1,219 +1,247 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Copy, Mail, MapPin, Github, Linkedin, Twitter, Youtube } from "lucide-react"
-import { Container } from "@/components/container"
-import { Section } from "@/components/section"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/hooks/use-toast"
-import { contactData } from "@/data/contact"
-
-const socialIcons = {
-  github: Github,
-  linkedin: Linkedin,
-  twitter: Twitter,
-  youtube: Youtube,
-}
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Section } from "@/components/ui/section";
+import { Textarea } from "@/components/ui/textarea";
+import { contactData } from "@/data/contact";
+import * as Icons from "lucide-react";
+import { Check, Clock, Copy, Mail, MapPin } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 export default function ContactPage() {
-  const { toast } = useToast()
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitStatus("idle"), 3000);
+    }, 1000);
+  };
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(contactData.email)
-      toast({
-        title: "Email copied!",
-        description: "Email address has been copied to your clipboard.",
-      })
+      await navigator.clipboard.writeText(contactData.email);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
     } catch (err) {
-      toast({
-        title: "Failed to copy",
-        description: "Please copy the email address manually.",
-        variant: "destructive",
-      })
+      console.error("Failed to copy email:", err);
     }
-  }
+  };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Client-side validation only (no backend)
-    if (!formData.name || !formData.email || !formData.message) {
-      toast({
-        title: "Please fill in all fields",
-        description: "All fields are required to send a message.",
-        variant: "destructive",
-      })
-      return
-    }
-
-    // Simulate form submission
-    toast({
-      title: "Message sent!",
-      description: "Thank you for your message. I'll get back to you soon.",
-    })
-
-    // Reset form
-    setFormData({ name: "", email: "", message: "" })
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
-  }
+  const isFormValid = formData.name && formData.email && formData.message;
 
   return (
-    <div className="flex flex-col">
+    <>
       {/* Hero Section */}
-      <Section className="gradient-bg">
-        <Container>
-          <div className="mx-auto max-w-4xl text-center space-y-6">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-              <span className="text-gradient">Get In Touch</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{contactData.availabilityNote}</p>
-          </div>
-        </Container>
+      <Section className="pt-24">
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+            Get In <span className="gradient-text">Touch</span>
+          </h1>
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            I&apos;m always open to discussing new opportunities, interesting
+            projects, or just having a chat about technology
+          </p>
+        </div>
       </Section>
 
-      {/* Contact Section */}
       <Section>
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-2">
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h2 className="text-3xl font-bold tracking-tighter">Let's Connect</h2>
-                <p className="text-muted-foreground">
-                  I'm always interested in discussing new opportunities, interesting projects, or just having a chat
-                  about technology and development.
-                </p>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Contact Information */}
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-3xl font-bold mb-8">
+                Contact <span className="gradient-text">Information</span>
+              </h2>
 
               <div className="space-y-6">
-                {/* Email */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Mail className="h-5 w-5" />
-                      Email
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
+                <div className="flex items-start gap-4 p-6 bg-card border border-border rounded-lg">
+                  <div className="w-12 h-12 bg-electric-600/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-electric-600" />
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="font-semibold">Email</h3>
                     <p className="text-muted-foreground">{contactData.email}</p>
-                    <div className="flex gap-2">
-                      <Button asChild>
-                        <a href={`mailto:${contactData.email}`}>Send Email</a>
-                      </Button>
-                      <Button variant="outline" onClick={copyEmail}>
-                        <Copy className="h-4 w-4 mr-2" />
-                        Copy
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={copyEmail}
+                      className="p-0 h-auto text-electric-600 hover:text-electric-700"
+                    >
+                      {emailCopied ? (
+                        <>
+                          <Check className="w-3 h-3 mr-1" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3 h-3 mr-1" />
+                          Copy
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
 
-                {/* Location */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <MapPin className="h-5 w-5" />
-                      Location
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground">{contactData.location}</p>
-                  </CardContent>
-                </Card>
+                <div className="flex items-start gap-4 p-6 bg-card border border-border rounded-lg">
+                  <div className="w-12 h-12 bg-electric-600/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-electric-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Location</h3>
+                    <p className="text-muted-foreground">
+                      {contactData.location}
+                    </p>
+                  </div>
+                </div>
 
-                {/* Social Links */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Social Media</CardTitle>
-                    <CardDescription>Connect with me on social platforms</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex gap-4">
-                      {Object.entries(contactData.links).map(([platform, url]) => {
-                        if (!url) return null
-                        const Icon = socialIcons[platform as keyof typeof socialIcons]
-                        return (
-                          <Button key={platform} variant="outline" size="icon" asChild>
-                            <a href={url} target="_blank" rel="noopener noreferrer">
-                              <Icon className="h-4 w-4" />
-                              <span className="sr-only">{platform}</span>
-                            </a>
-                          </Button>
-                        )
-                      })}
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="flex items-start gap-4 p-6 bg-card border border-border rounded-lg">
+                  <div className="w-12 h-12 bg-electric-600/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-electric-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">Availability</h3>
+                    <p className="text-muted-foreground">
+                      {contactData.availability}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Contact Form */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Send a Message</CardTitle>
-                <CardDescription>Fill out the form below and I'll get back to you as soon as possible</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      placeholder="Your name"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="your.email@example.com"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder="Tell me about your project or just say hello..."
-                      rows={5}
-                      required
-                    />
-                  </div>
-                  <Button type="submit" className="w-full glow-accent">
-                    Send Message
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+            {/* Social Links */}
+            <div>
+              <h3 className="text-xl font-semibold mb-4 ">Connect With Me</h3>
+              <div className="flex gap-4 flex-wrap">
+                {contactData.socialLinks.map((link) => {
+                  const Icon = Icons[
+                    link.icon as keyof typeof Icons
+                  ] as React.ComponentType<{ className?: string }>;
+                  return (
+                    <Button key={link.name} variant="outline" size="sm" asChild>
+                      <Link
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Icon className="w-4 h-4 mr-2" />
+                        {link.name}
+                      </Link>
+                    </Button>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        </Container>
+
+          {/* Contact Form */}
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-3xl font-bold mb-2">
+                Send Me A <span className="gradient-text">Message</span>
+              </h2>
+              <p className="text-muted-foreground">
+                Fill out the form below and I will get back to you as soon as
+                possible.
+              </p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="name">{contactData.formFields.name}</Label>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="transition-colors focus:border-electric-600"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="email">{contactData.formFields.email}</Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="transition-colors focus:border-electric-600"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="message">
+                  {contactData.formFields.message}
+                </Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  required
+                  className="transition-colors focus:border-electric-600 resize-none"
+                  placeholder="Tell me about your project or just say hello..."
+                />
+              </div>
+
+              <Button
+                type="submit"
+                disabled={!isFormValid || isSubmitting}
+                className="w-full btn-electric"
+                size="lg"
+              >
+                {isSubmitting ? "Sending..." : "Send Message"}
+              </Button>
+
+              {submitStatus === "success" && (
+                <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+                  <p className="text-green-800 dark:text-green-200 text-sm">
+                    Thank you for your message! I will get back to you soon.
+                  </p>
+                </div>
+              )}
+
+              {submitStatus === "error" && (
+                <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                  <p className="text-red-800 dark:text-red-200 text-sm">
+                    Something went wrong. Please try again or contact me
+                    directly via email.
+                  </p>
+                </div>
+              )}
+            </form>
+          </div>
+        </div>
       </Section>
-    </div>
-  )
+    </>
+  );
 }

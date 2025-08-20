@@ -1,125 +1,129 @@
-import type { Metadata } from "next"
-import Image from "next/image"
-import { Container } from "@/components/container"
-import { Section } from "@/components/section"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { aboutData } from "@/data/about"
+import myImage from "@/assets/my-fav.webp";
+import { Section } from '@/components/ui/section';
+import { aboutData } from '@/data/about';
+import { Award, Coffee, Heart, User } from 'lucide-react';
+import { Metadata } from 'next';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: "About",
-  description: "Learn more about my background, experience, and passion for development",
-}
+  title: 'About',
+  description: 'Learn more about my background, experience, and what drives me as a developer.',
+};
 
 export default function AboutPage() {
   return (
-    <div className="flex flex-col">
+    <>
       {/* Hero Section */}
-      <Section className="gradient-bg">
-        <Container>
-          <div className="mx-auto max-w-4xl text-center space-y-6">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-              <span className="text-gradient">About Me</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Passionate about creating innovative solutions and building exceptional user experiences
-            </p>
+      <Section className="pt-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="space-y-8">
+            <div>
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+                About <span className="gradient-text">Me</span>
+              </h1>
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                {aboutData.bio.split('\n\n').map((paragraph, index) => (
+                  <p key={index} className="text-muted-foreground leading-relaxed mb-6">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
-        </Container>
+
+          <div className="relative">
+            <div className="aspect-square relative overflow-hidden rounded-2xl bg-muted">
+              <Image
+                src={myImage}
+                alt="Professional headshot"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="absolute -inset-4 bg-gradient-to-br from-electric-400/20 to-purple-400/20 rounded-2xl -z-10 blur-xl" />
+          </div>
+        </div>
       </Section>
 
-      {/* Main Content */}
+      {/* Stats */}
+      <Section className="bg-muted/30">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {aboutData.stats.map((stat, index) => (
+            <div key={index} className="text-center">
+              <div className="text-3xl sm:text-4xl font-bold text-electric-600 dark:text-electric-400 mb-2">
+                {stat.value}
+              </div>
+              <div className="text-sm text-muted-foreground font-medium">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Highlights */}
       <Section>
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-3">
-            {/* Bio and Photo */}
-            <div className="lg:col-span-2 space-y-8">
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold tracking-tighter">My Story</h2>
-                <div className="prose prose-gray dark:prose-invert max-w-none">
-                  <p className="text-muted-foreground leading-relaxed text-lg">{aboutData.longBio}</p>
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Career <span className="gradient-text">Highlights</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {aboutData.highlights.map((highlight, index) => (
+              <div 
+                key={index} 
+                className="flex items-start gap-4 p-6 bg-card border border-border rounded-lg hover:shadow-md transition-shadow duration-300"
+              >
+                <div className="flex-shrink-0 w-8 h-8 bg-electric-600/10 rounded-full flex items-center justify-center">
+                  <Award className="w-4 h-4 text-electric-600" />
                 </div>
+                <p className="text-muted-foreground">{highlight}</p>
               </div>
-
-              {/* Highlights */}
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold tracking-tighter">What I Bring</h3>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {aboutData.highlights.map((highlight, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="h-2 w-2 rounded-full bg-primary mt-3 shrink-0" />
-                      <p className="text-muted-foreground">{highlight}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Sidebar */}
-            <div className="space-y-8">
-              {/* Photo */}
-              <Card>
-                <CardContent className="p-6">
-                  <div className="aspect-square overflow-hidden rounded-lg bg-muted">
-                    <Image
-                      src={aboutData.headshot || "/placeholder.svg"}
-                      alt="Professional headshot"
-                      width={400}
-                      height={400}
-                      className="object-cover w-full h-full"
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Stats */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>Quick Stats</CardTitle>
-                  <CardDescription>A snapshot of my journey</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {aboutData.stats.map((stat, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <span className="text-sm text-muted-foreground">{stat.label}</span>
-                      <Badge variant="secondary" className="font-bold">
-                        {stat.value}
-                      </Badge>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            </div>
+            ))}
           </div>
-        </Container>
+        </div>
       </Section>
 
-      {/* CTA Section */}
-      <Section className="bg-muted/50">
-        <Container>
-          <div className="mx-auto max-w-2xl text-center space-y-6">
-            <h2 className="text-3xl font-bold tracking-tighter">Let's Work Together</h2>
-            <p className="text-muted-foreground">
-              I'm always interested in new opportunities and exciting projects. Let's discuss how we can bring your
-              ideas to life.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 glow-accent"
-              >
-                Get In Touch
-              </a>
-              <a
-                href="/projects"
-                className="inline-flex items-center justify-center rounded-md border border-input bg-background px-6 py-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-              >
-                View My Work
-              </a>
+      {/* Personal Touch */}
+      <Section className="bg-muted/30">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-12">
+            Beyond <span className="gradient-text">Code</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="space-y-4">
+              <div className="w-16 h-16 bg-electric-600/10 rounded-full flex items-center justify-center mx-auto">
+                <Coffee className="w-8 h-8 text-electric-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Coffee Enthusiast</h3>
+              <p className="text-muted-foreground">
+                I believe the best code is written with the perfect cup of coffee. Always exploring new brewing methods and coffee origins.
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="w-16 h-16 bg-electric-600/10 rounded-full flex items-center justify-center mx-auto">
+                <User className="w-8 h-8 text-electric-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Mentor & Teacher</h3>
+              <p className="text-muted-foreground">
+                Passionate about sharing knowledge and helping others grow in their development journey through mentoring and technical writing.
+              </p>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="w-16 h-16 bg-electric-600/10 rounded-full flex items-center justify-center mx-auto">
+                <Heart className="w-8 h-8 text-electric-600" />
+              </div>
+              <h3 className="text-xl font-semibold">Open Source</h3>
+              <p className="text-muted-foreground">
+                Active contributor to open-source projects, believing in the power of community-driven development and knowledge sharing.
+              </p>
             </div>
           </div>
-        </Container>
+        </div>
       </Section>
-    </div>
-  )
+    </>
+  );
 }

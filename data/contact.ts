@@ -1,13 +1,30 @@
-import type { ContactData } from "./types"
+import { ContactData } from "./types";
 
 export const contactData: ContactData = {
-  email: "alex@example.com", // TODO: Replace with your email
-  location: "San Francisco, CA", // TODO: Replace with your location
-  availabilityNote: "Currently available for new opportunities and interesting projects.",
-  links: {
-    github: "https://github.com/yourusername", // TODO: Replace with your GitHub
-    linkedin: "https://linkedin.com/in/yourprofile", // TODO: Replace with your LinkedIn
-    twitter: "https://twitter.com/yourusername", // TODO: Replace with your Twitter
-    youtube: "https://youtube.com/@yourchannel", // TODO: Replace with your YouTube (optional)
+  email: "contact@mobin.dev",
+  location: "Narayanganj, Dhaka, Bangladesh",
+  availability: "Available for new opportunities",
+  socialLinks: [
+    { name: "GitHub", href: "https://github.com/mobinrayhan", icon: "Github" },
+    {
+      name: "LinkedIn",
+      href: "https://www.linkedin.com/in/rayhanuddinmobin",
+      icon: "Linkedin",
+    },
+    {
+      name: "Instagram",
+      href: "https://www.instagram.com/mobin606272",
+      icon: "Instagram",
+    },
+    {
+      name: "Facebook",
+      href: "https://www.facebook.com/rayhanuddinmobin",
+      icon: "Facebook",
+    },
+  ],
+  formFields: {
+    name: "Full Name",
+    email: "Email Address",
+    message: "Message",
   },
-}
+};

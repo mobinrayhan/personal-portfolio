@@ -1,34 +1,46 @@
-import type { SkillsData } from "./types"
+import { SkillsData } from "./types";
 
 export const skillsData: SkillsData = {
   categories: [
     {
       name: "Languages",
-      items: ["JavaScript", "TypeScript"],
+      skills: ["JavaScript", "TypeScript", "Go"],
     },
     {
       name: "Frontend",
-      items: ["HTML", "CSS", "Tailwind", "MUI", "React", "Next.js", "Astro"],
+      skills: ["HTML", "CSS", "Tailwind", "MUI", "React", "Next.js", "Astro"],
     },
     {
       name: "Backend",
-      items: ["Node.js", "Express.js", "Nest.js"],
+      skills: ["Node.js", "Express.js", "Nest.js"],
     },
     {
       name: "Databases",
-      items: ["MongoDB", "MySQL", "PostgreSQL"],
+      skills: ["MongoDB", "MySQL", "PostgreSQL"],
     },
     {
       name: "Mobile",
-      items: ["React Native (Android, iOS)"],
+      skills: ["React Native (Android, iOS)"],
     },
     {
       name: "Tools",
-      items: ["Git", "GitHub", "Bitbucket", "CI/CD (Jenkins, GitHub Actions)", "Docker", "Kubernetes"],
+      skills: [
+        "Git",
+        "GitHub",
+        "Bitbucket",
+        "CI/CD (Jenkins, GitHub Actions)",
+        "Docker",
+        "Kubernetes",
+      ],
     },
     {
       name: "Project Management",
-      items: ["Jira", "Agile (Scrum, Kanban)"],
+      skills: ["Jira", "Agile (Scrum, Kanban)"],
     },
   ],
-}
+};
+
+export const technologyMastered = skillsData.categories.reduce(
+  (acc, curr) => acc + curr.skills.length,
+  0
+);

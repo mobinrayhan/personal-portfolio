@@ -1,51 +1,58 @@
-import type { ExperienceData } from "./types"
+import { ExperienceData } from './types';
 
 export const experienceData: ExperienceData = {
-  roles: [
-    {
-      company: "Tech Innovations Inc.", // TODO: Replace with your company
-      title: "Senior Full-Stack Developer",
-      start: "2022",
-      end: "Present",
-      location: "San Francisco, CA", // TODO: Replace with your location
-      bullets: [
-        "Led development of a customer-facing web application serving 100k+ users",
-        "Architected and implemented microservices using Node.js and Docker",
-        "Mentored junior developers and established coding standards",
-        "Improved application performance by 40% through optimization techniques",
+  experiences: [
+     {
+      id: 'kreatech',
+      company: 'Kreatech (Hong Kong)',
+      position: 'Front-End Developer',
+      companyLink: "https://www.kreatech.ca",
+      startDate: '2026-2',
+      endDate: null,
+      description: 'Contributed as a front-end developer for a web and mobile app development agency, delivering high-quality UIs.',
+      achievements: [
+        'Developed responsive UIs with React and MUI',
+        'Collaborated in Agile (Scrum) teams',
+        'Optimized performance with clean, reusable code',
       ],
-      links: {
-        website: "https://techinnovations.com", // TODO: Replace with company website
-      },
+      technologies: ['React', 'MUI', 'JavaScript', 'Go', 'Redux'],
+      location: 'Remote',
     },
     {
-      company: "Digital Solutions LLC", // TODO: Replace with your company
-      title: "Full-Stack Developer",
-      start: "2020",
-      end: "2022",
-      location: "Remote",
-      bullets: [
-        "Developed and maintained multiple client projects using React and Next.js",
-        "Implemented CI/CD pipelines using GitHub Actions and Jenkins",
-        "Collaborated with design teams to create pixel-perfect user interfaces",
-        "Built RESTful APIs and integrated third-party services",
+      id: 'zoft-it',
+      company: 'Zoft IT',
+      position: 'Full-Stack Developer & Mobile App Developer',
+      companyLink: "https://zoftit.com",
+     startDate: '2024-01',
+      endDate: '2025-01',
+      description: 'Worked as a full-stack developer and mobile app developer focusing on building scalable web and mobile applications.',
+      achievements: [
+        'Developed the company website using Next.js',
+        'Contributed to building both Android and iOS mobile applications',
+        'Managed end-to-end development to ensure smooth performance',
       ],
-      links: {
-        website: "https://digitalsolutions.com", // TODO: Replace with company website
-      },
+      technologies: ['Next.js', 'React Native', 'Node.js', 'MongoDB', "Typescript"],
+      location: 'Remote',
     },
     {
-      company: "StartupXYZ", // TODO: Replace with your company
-      title: "Frontend Developer",
-      start: "2019",
-      end: "2020",
-      location: "New York, NY", // TODO: Replace with your location
-      bullets: [
-        "Built responsive web applications using React and TypeScript",
-        "Implemented state management solutions using Redux and Context API",
-        "Worked closely with UX designers to improve user experience",
-        "Participated in agile development processes and sprint planning",
+      id: 'james-prince',
+      company: 'James Prince',
+      position: 'Full-Stack Web Developer',
+      companyLink: "https://www.youtube.com/@JamesPrinceB",
+      startDate: '2023-2',
+      endDate: '2023-10',
+      description: 'Worked on client projects under James Prince, a YouTuber and digital creator, building modern web applications and admin panels.',
+      achievements: [
+        'Developed full-stack web apps using Next.js, React, and MongoDB',
+        'Built admin panels and dynamic websites tailored to client needs',
+        'Delivered responsive, SEO-friendly solutions with clean architecture',
       ],
+      technologies: ['Next.js', 'React', 'MongoDB', 'Node.js', "Typescript"],
+      location: 'Remote',
     },
+   
   ],
-}
+};
+
+export const companiesWorkWith = 10 + "+"
+export const projectDelivered = 17 + "+"

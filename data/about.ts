@@ -1,20 +1,30 @@
-import type { AboutData } from "./types"
+import { projectDelivered } from "./experience";
+import { technologyMastered } from "./skills";
+import { AboutData } from "./types";
+
+export const yearsOfExperience = `${new Date().getFullYear() - 2022}+`;
+export const totalProjects = 10 + "+";
+export const happyClients = 10;
 
 export const aboutData: AboutData = {
-  longBio:
-    "I'm a passionate full-stack developer with expertise in modern web technologies. I love building applications that not only look great but also provide exceptional user experiences. My journey in software development started with curiosity about how websites work, and it has evolved into a career focused on creating innovative solutions using cutting-edge technologies like React, Next.js, and Node.js.", // TODO: Replace with your bio
+  bio: `I'm a passionate full-stack developer with over ${yearsOfExperience} years of experience building web applications and mobile solutions. My journey started with a curiosity for how things work on the web, and it has evolved into a deep expertise in modern JavaScript ecosystems, cloud technologies, and user experience design.
+
+I specialize in creating scalable applications using React, Next.js, and Node.js, while also having strong experience in mobile development with React Native. I believe in writing clean, maintainable code and following best practices for performance and accessibility.
+
+When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge through technical blog posts and mentoring junior developers.`,
   highlights: [
-    "5+ years of full-stack development experience", // TODO: Update with your experience
-    "Expert in React, Next.js, and TypeScript",
-    "Strong background in both frontend and backend development",
-    "Passionate about clean code and best practices",
-    "Experience with agile development methodologies",
+    `Led development of ${totalProjects} production applications`,
+    "Expert in modern React ecosystem and TypeScript",
+    "Strong advocate for accessibility and performance",
+    "Active contributor to open-source projects",
+    "Experienced in Agile development methodologies",
+    "Passionate about mentoring and knowledge sharing",
   ],
-  headshot: "/professional-headshot.png", // TODO: Replace with your photo
+  headshotPath: "/images/headshot.jpg", // TODO: Add professional headshot
   stats: [
-    { label: "Years Experience", value: "5+" }, // TODO: Update with your stats
-    { label: "Projects Completed", value: "50+" },
-    { label: "Technologies Mastered", value: "20+" },
-    { label: "Happy Clients", value: "30+" },
+    { label: "Years Experience", value: yearsOfExperience },
+    { label: "Projects Completed", value: projectDelivered },
+    { label: "Technologies Mastered", value: technologyMastered + "+" },
+    { label: "Happy Clients", value: happyClients + "+" },
   ],
-}
+};

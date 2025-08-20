@@ -1,181 +1,281 @@
-# Developer Portfolio Website
+# Modern Portfolio Website
 
-A modern, responsive portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. Features a sophisticated gradient black aesthetic with dark/light mode support.
+A beautiful, responsive portfolio website built with Next.js 14, TypeScript, and Tailwind CSS. Features dark/light mode, smooth animations, and a comprehensive project showcase.
 
-## 🚀 Features
+## 🌟 Features
 
-- **Modern Design**: Gradient black aesthetic with elegant transitions
-- **Dark/Light Mode**: Seamless theme switching with persistent preferences
-- **Responsive**: Mobile-first design that works on all devices
-- **Performance**: Optimized with Next.js 14 App Router and static generation
-- **SEO Optimized**: Comprehensive metadata and OpenGraph tags
-- **Accessible**: WCAG compliant with proper ARIA labels and keyboard navigation
+- **Modern Design**: Clean, professional design with gradient backgrounds and smooth animations
+- **Responsive**: Fully responsive design that works on all devices
+- **Dark/Light Mode**: Toggle between dark and light themes with persistent storage
+- **Type Safe**: Built with TypeScript for better development experience
+- **Performance**: Optimized with Next.js 14 App Router for fast loading
+- **SEO Friendly**: Proper metadata, OpenGraph, and Twitter card tags
+- **Interactive**: Smooth animations with Framer Motion
+- **Project Filtering**: Client-side filtering for projects by category
+- **Contact Form**: Functional contact form with validation
+
+## 🚀 Quick Start
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd portfolio-website
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 ├── app/                    # Next.js App Router pages
 │   ├── about/             # About page
 │   ├── contact/           # Contact page
-│   ├── experience/        # Experience timeline
-│   ├── projects/          # Projects listing and detail pages
-│   ├── skills/            # Skills showcase
-│   ├── layout.tsx         # Root layout with navigation
-│   └── page.tsx           # Homepage
+│   ├── experience/        # Experience page
+│   ├── projects/          # Projects page and dynamic routes
+│   ├── skills/            # Skills page
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Home page
+│   └── not-found.tsx      # 404 page
 ├── components/            # Reusable components
-│   ├── ui/               # shadcn/ui components
-│   ├── navbar.tsx        # Navigation component
-│   ├── footer.tsx        # Footer component
-│   ├── theme-toggle.tsx  # Dark/light mode toggle
-│   └── ...               # Other custom components
-├── data/                 # Content data files
-│   ├── types.ts          # TypeScript interfaces
-│   ├── site.ts           # Site configuration
-│   ├── hero.ts           # Homepage content
-│   ├── about.ts          # About page content
-│   ├── skills.ts         # Skills data
-│   ├── projects.ts       # Projects data
-│   ├── experience.ts     # Work experience
-│   └── contact.ts        # Contact information
-├── lib/                  # Utility functions
+│   ├── layout/            # Layout components (Navbar, Footer)
+│   └── ui/                # UI components
+├── data/                  # Data files (IMPORTANT: Edit these!)
+│   ├── about.ts           # About page content
+│   ├── contact.ts         # Contact information
+│   ├── experience.ts      # Work experience
+│   ├── hero.ts            # Hero section content
+│   ├── projects.ts        # Project information
+│   ├── site.ts            # Site-wide information
+│   ├── skills.ts          # Skills and technologies
+│   └── types.ts           # TypeScript interfaces
+├── lib/                   # Utility functions
+├── providers/             # React context providers
 └── public/               # Static assets
-\`\`\`
+    └── images/           # Images (ADD YOUR IMAGES HERE!)
+```
 
-## 🛠️ Tech Stack
+## 🎨 Customization Guide
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
-- **Icons**: Lucide React
-- **Fonts**: Geist Sans & Manrope
-- **Theme**: next-themes
-- **Animations**: Framer Motion (ready to implement)
+### 1. Personal Information
 
-## 🚀 Getting Started
+Edit the files in the `/data` directory to customize content:
 
-### Prerequisites
+**Site Information** (`/data/site.ts`):
+- Update name, title, description
+- Modify navigation links
+- Change social media links
 
-- Node.js 18+ 
-- npm, yarn, or pnpm
+**Hero Section** (`/data/hero.ts`):
+- Change name and title
+- Update subtitle/bio
+- Modify call-to-action text
 
-### Installation
+**About Page** (`/data/about.ts`):
+- Replace bio text
+- Update career highlights
+- Change personal stats
 
-1. Clone the repository:
-\`\`\`bash
-git clone <your-repo-url>
-cd portfolio-website
-\`\`\`
+### 2. Projects
 
-2. Install dependencies:
-\`\`\`bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-\`\`\`
+Edit `/data/projects.ts` to add your projects:
 
-3. Start the development server:
-\`\`\`bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-\`\`\`
+```typescript
+{
+  id: 'unique-project-id',
+  title: 'Project Name',
+  description: 'Short description',
+  longDescription: 'Detailed description...',
+  technologies: ['React', 'Node.js', 'MongoDB'],
+  category: 'Web Development',
+  featured: true,
+  imagePath: '/images/projects/project-image.jpg',
+  githubUrl: 'https://github.com/...',
+  liveUrl: 'https://project-url.com',
+  status: 'completed'
+}
+```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+### 3. Experience
 
-## ✏️ Customization
+Update `/data/experience.ts` with your work history:
 
-### 1. Update Personal Information
+```typescript
+{
+  id: 'unique-id',
+  company: 'Company Name',
+  position: 'Job Title',
+  startDate: '2023-01',
+  endDate: null, // null for current position
+  description: 'Job description...',
+  achievements: ['Achievement 1', 'Achievement 2'],
+  technologies: ['Tech1', 'Tech2'],
+  location: 'City, State'
+}
+```
 
-Edit the data files in the `/data` directory:
+### 4. Skills
 
-- `data/site.ts` - Site name, navigation, social links
-- `data/hero.ts` - Homepage hero content
-- `data/about.ts` - About page content and stats
-- `data/skills.ts` - Technical skills by category
-- `data/projects.ts` - Project portfolio
-- `data/experience.ts` - Work experience timeline
-- `data/contact.ts` - Contact information
+Modify `/data/skills.ts` to update your skills. Categories are:
+- Languages
+- Frontend
+- Backend
+- Databases
+- Mobile
+- Tools
+- Project Management
 
-### 2. Replace Images
+### 5. Images
 
-Replace placeholder images in the `/public` directory:
+Add your images to the `/public/images/` directory:
 
-- `professional-headshot.png` - Your professional photo
-- `ecommerce-website-screenshot.png` - Project screenshots
-- `task-management-app.png`
-- `weather-dashboard.png`
-- `blog-cms-interface.png`
+```
+/public/images/
+├── headshot.jpg           # Your professional photo
+├── og-image.jpg           # Social sharing image
+└── projects/              # Project screenshots
+    ├── project1.jpg
+    ├── project2.jpg
+    └── ...
+```
 
-### 3. Update Metadata
+**Image Requirements**:
+- Headshot: 400x400px, square format
+- Project images: 800x400px, 2:1 aspect ratio
+- OG image: 1200x630px for social sharing
 
-Update SEO metadata in:
-- `app/layout.tsx` - Global metadata
-- Individual page files - Page-specific metadata
+### 6. Colors and Styling
 
-### 4. Customize Styling
+The color scheme can be customized in `tailwind.config.ts`:
 
-The design system uses CSS custom properties defined in `app/globals.css`. Key customization areas:
+```typescript
+colors: {
+  electric: {
+    500: '#3b82f6', // Primary blue
+    600: '#2563eb',
+    // ... other shades
+  }
+}
+```
 
-- **Colors**: Update the color tokens in the `:root` and `.dark` selectors
-- **Fonts**: Modify font imports in `app/layout.tsx`
-- **Gradients**: Adjust gradient utilities in `globals.css`
+### 7. Contact Information
 
-## 📱 Pages Overview
+Update `/data/contact.ts`:
+- Change email address
+- Update location
+- Modify availability status
+- Update social links
 
-- **Homepage** (`/`) - Hero section, featured projects, skills preview
-- **About** (`/about`) - Detailed bio, highlights, stats, professional photo
-- **Skills** (`/skills`) - Categorized technical skills
-- **Projects** (`/projects`) - Filterable project grid with detail pages
-- **Experience** (`/experience`) - Professional timeline with achievements
-- **Contact** (`/contact`) - Contact form and social links
+## 🛠 Development
 
-## 🎨 Design System
+### Available Scripts
 
-### Colors
-- **Primary**: Vibrant pink accent (#ff4081)
-- **Background**: Deep blacks and elegant grays
-- **Text**: High contrast for accessibility
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-### Typography
-- **Headings**: Geist Sans
-- **Body**: Manrope
-- **Scale**: Responsive typography with proper hierarchy
+### Adding New Pages
 
-### Components
-- Consistent spacing and border radius
-- Subtle shadows and hover effects
-- Smooth transitions and animations
+1. Create a new folder in `/app`
+2. Add a `page.tsx` file
+3. Update navigation in `/data/site.ts`
+
+### Adding New Components
+
+1. Create component in `/components/ui` or `/components/layout`
+2. Export from the component file
+3. Import where needed
+
+## 🔧 Configuration
+
+### Environment Variables
+
+No environment variables required for basic functionality.
+
+### SEO Configuration
+
+Update metadata in:
+- `/app/layout.tsx` (global)
+- Individual page files (page-specific)
+
+### Theme Configuration
+
+The theme system uses:
+- `providers/theme-provider.tsx` - Theme context
+- `components/ui/theme-toggle.tsx` - Toggle component
+- Default theme: Dark mode
 
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
 
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy automatically with each push
+1. Push to GitHub
+2. Connect repository to Vercel
+3. Deploy automatically
+
+### Netlify
+
+1. Build command: `npm run build`
+2. Publish directory: `out`
+3. Deploy
 
 ### Other Platforms
 
-Build the static site:
-\`\`\`bash
-npm run build
-\`\`\`
+The site exports static files and can be deployed to any static hosting service.
 
-The built files will be in the `.next` directory.
+## 🎯 Performance Tips
+
+- Images are automatically optimized with Next.js Image component
+- Fonts are preloaded for better performance
+- Components use proper lazy loading
+- CSS is optimized with Tailwind purging
+
+## 📱 Responsive Design
+
+Breakpoints:
+- Mobile: < 768px
+- Tablet: 768px - 1024px
+- Desktop: > 1024px
+
+## 🔍 SEO Features
+
+- Proper HTML structure
+- Meta tags and OpenGraph
+- JSON-LD structured data (can be added)
+- Sitemap generation (can be added)
+- Canonical URLs
+
+## 🐛 Troubleshooting
+
+**Images not loading?**
+- Check file paths in data files
+- Ensure images exist in `/public/images/`
+- Verify image file names match data
+
+**Build errors?**
+- Run `npm run lint` to check for TypeScript errors
+- Ensure all data files have proper exports
+- Check for missing imports
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open source and available under the MIT License.
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](issues).
+Contributions, issues, and feature requests are welcome!
 
 ---
 
-**Note**: Remember to update all TODO comments in the data files with your actual information before deploying to production.
+**Need help customizing your portfolio?** Check the TODO comments in the code for specific areas that need your personal content.

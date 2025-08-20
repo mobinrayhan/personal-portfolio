@@ -1,78 +1,146 @@
-import type { Metadata } from "next"
-import { Container } from "@/components/container"
-import { Section } from "@/components/section"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { SkillPill } from "@/components/skill-pill"
-import { skillsData } from "@/data/skills"
+import { Section } from "@/components/ui/section";
+import { SkillPill } from "@/components/ui/skill-pill";
+import { skillsData } from "@/data/skills";
+import {
+  Code,
+  Database,
+  Layers,
+  Settings,
+  Smartphone,
+  Users,
+} from "lucide-react";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Skills",
-  description: "My technical skills and expertise across various technologies and tools",
-}
+  description: "Technologies and tools I use to bring ideas to life.",
+};
+
+const categoryIcons: {
+  [key: string]: React.ComponentType<{ className?: string }>;
+} = {
+  Languages: Code,
+  Frontend: Layers,
+  Backend: Database,
+  Databases: Database,
+  Mobile: Smartphone,
+  Tools: Settings,
+  "Project Management": Users,
+};
 
 export default function SkillsPage() {
   return (
-    <div className="flex flex-col">
+    <>
       {/* Hero Section */}
-      <Section className="gradient-bg">
-        <Container>
-          <div className="mx-auto max-w-4xl text-center space-y-6">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
-              <span className="text-gradient">My Skills</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Technologies, tools, and methodologies I use to build exceptional digital experiences
-            </p>
-          </div>
-        </Container>
+      <Section className="pt-24">
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-6">
+            My <span className="gradient-text">Skills</span>
+          </h1>
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            Technologies and tools I use to bring ideas to life and solve
+            complex problems
+          </p>
+        </div>
       </Section>
 
-      {/* Skills Section */}
+      {/* Skills Grid */}
       <Section>
-        <Container>
-          <div className="space-y-12">
-            <div className="text-center space-y-4">
-              <h2 className="text-3xl font-bold tracking-tighter">Technical Expertise</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                A comprehensive overview of my technical skills organized by category
-              </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {skillsData.categories.map((category, index) => {
+            const Icon = categoryIcons[category.name] || Code;
+
+            return (
+              <div
+                key={category.name}
+                className="p-8 bg-card border border-border rounded-xl hover:shadow-lg transition-all duration-300"
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 bg-electric-600/10 rounded-lg flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-electric-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold">{category.name}</h2>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {category.skills.map((skill) => (
+                    <SkillPill key={skill} skill={skill} />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      {/* Proficiency Levels */}
+      <Section className="bg-muted/30">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-12">
+            Proficiency <span className="gradient-text">Levels</span>
+          </h2>
+
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+                Expert
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "JavaScript",
+                  "TypeScript",
+                  "React",
+                  "Next.js",
+                  "Node.js",
+                  "HTML",
+                  "CSS",
+                  "Tailwind",
+                ].map((skill) => (
+                  <SkillPill key={skill} skill={skill} />
+                ))}
+              </div>
             </div>
 
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {skillsData.categories.map((category, index) => (
-                <Card key={index} className="h-fit">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-primary" />
-                      {category.name}
-                    </CardTitle>
-                    <CardDescription>
-                      {category.items.length} skill{category.items.length !== 1 ? "s" : ""}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2">
-                      {category.items.map((skill) => (
-                        <SkillPill key={skill} skill={skill} />
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            <div>
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
+                Proficient
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "Go",
+                  "Express.js",
+                  "MongoDB",
+                  "PostgreSQL",
+                  "React Native",
+                  "Docker",
+                  "Git",
+                ].map((skill) => (
+                  <SkillPill key={skill} skill={skill} />
+                ))}
+              </div>
             </div>
 
-            {/* Additional Info */}
-            <div className="bg-muted/50 rounded-lg p-8 text-center space-y-4">
-              <h3 className="text-2xl font-bold">Always Learning</h3>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Technology evolves rapidly, and I'm committed to continuous learning. I regularly explore new
-                frameworks, tools, and best practices to stay current with industry trends and deliver cutting-edge
-                solutions.
-              </p>
+            <div>
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                Familiar
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {["Nest.js", "MySQL", "Kubernetes", "Jenkins", "Astro"].map(
+                  (skill) => (
+                    <SkillPill key={skill} skill={skill} />
+                  )
+                )}
+              </div>
             </div>
           </div>
-        </Container>
+        </div>
       </Section>
-    </div>
-  )
+    </>
+  );
 }
