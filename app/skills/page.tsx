@@ -12,8 +12,31 @@ import {
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Skills",
-  description: "Technologies and tools I use to bring ideas to life.",
+  title: "Skills | Full Stack Developer & Mobile App Developer",
+  description:
+    "Explore the web development skills and technologies I use, including React, Next.js, Node.js, MongoDB, PostgreSQL, and more. Building modern, fast, and scalable web and mobile applications.",
+  keywords: [
+    "Full Stack Developer",
+    "Mobile App Developer",
+    "React",
+    "Next.js",
+    "Node.js",
+    "MongoDB",
+    "PostgreSQL",
+    "JavaScript",
+    "TypeScript",
+    "Web Development",
+    "Frontend",
+    "Backend",
+  ],
+  openGraph: {
+    title: "Skills | Full Stack Developer & Mobile App Developer",
+    description:
+      "Technologies and tools I use to create modern, user-friendly, and scalable web and mobile applications.",
+    url: "https://mobin.dev/skills",
+    siteName: "Mobin Portfolio",
+    type: "website",
+  },
 };
 
 const categoryIcons: {

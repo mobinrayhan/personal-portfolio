@@ -9,9 +9,31 @@ import {
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Experience",
+  title: "Experience | Full Stack Developer & Mobile App Developer",
   description:
-    "My professional journey and career highlights in software development.",
+    "Explore my professional journey as a Full Stack Developer and Mobile App Developer. See my career highlights, key projects, and the technologies I’ve mastered over the years.",
+  keywords: [
+    "Full Stack Developer",
+    "Mobile App Developer",
+    "Web Development",
+    "Software Developer",
+    "Career",
+    "Experience",
+    "Projects",
+    "React",
+    "Next.js",
+    "Node.js",
+    "MongoDB",
+    "PostgreSQL",
+  ],
+  openGraph: {
+    title: "Experience | Full Stack Developer & Mobile App Developer",
+    description:
+      "Discover my career path, professional experience, and projects as a Full Stack and Mobile App Developer.",
+    url: "https://mobin.dev/experience",
+    siteName: "Mobin Portfolio",
+    type: "website",
+  },
 };
 
 export default function ExperiencePage() {
