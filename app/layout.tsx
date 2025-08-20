@@ -1,12 +1,12 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { ThemeProvider } from '@/providers/theme-provider';
-import { Navbar } from '@/components/layout/navbar';
-import { Footer } from '@/components/layout/footer';
-import { siteData } from '@/data/site';
+import { Footer } from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
+import { siteData } from "@/data/site";
+import { ThemeProvider } from "@/providers/theme-provider";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
@@ -14,19 +14,25 @@ export const metadata: Metadata = {
     template: `%s | ${siteData.name}`,
   },
   description: siteData.description,
-  keywords: ['full stack developer', 'web developer', 'react', 'next.js', 'typescript'],
+  keywords: [
+    "full stack developer",
+    "web developer",
+    "react",
+    "next.js",
+    "typescript",
+  ],
   authors: [{ name: siteData.name }],
   creator: siteData.name,
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
+    type: "website",
+    locale: "en_US",
     url: siteData.url,
     title: siteData.name,
     description: siteData.description,
     siteName: siteData.name,
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: siteData.name,
@@ -34,11 +40,11 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: siteData.name,
     description: siteData.description,
-    images: ['/images/og-image.jpg'],
-    creator: '@alexjohnson',
+    images: ["/images/og-image.jpg"],
+    creator: "@alexjohnson",
   },
   robots: {
     index: true,
@@ -46,9 +52,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
 };

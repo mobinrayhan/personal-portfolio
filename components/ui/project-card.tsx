@@ -1,11 +1,11 @@
-"use client"
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Project } from '@/data/types';
-import { motion } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Project } from "@/data/types";
+import { motion } from "framer-motion";
+import { ExternalLink, Github } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface ProjectCardProps {
   project: Project;
@@ -23,21 +23,19 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
       {/* Image */}
       <div className="relative h-48 overflow-hidden bg-muted">
         <Image
-          src={project.imagePath}
+          src={`https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop`}
           alt={project.title}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = `https://images.pexels.com/photos/270360/pexels-photo-270360.jpeg?auto=compress&cs=tinysrgb&w=800&h=400&fit=crop`;
-          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        
+
         {/* Status Badge */}
         <div className="absolute top-3 right-3">
-          <Badge variant={project.status === 'completed' ? 'default' : 'outline'}>
-            {project.status === 'completed' ? 'Live' : 'In Progress'}
+          <Badge
+            variant={project.status === "completed" ? "default" : "outline"}
+          >
+            {project.status === "completed" ? "Live" : "In Progress"}
           </Badge>
         </div>
 
