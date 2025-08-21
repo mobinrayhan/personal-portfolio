@@ -90,6 +90,11 @@ export default function RootLayout({
           </div>
         </ThemeProvider>
       </body>
+      <script
+        defer
+        src="https://umami-stats.editors.academy/script.js"
+        data-website-id="aeaa6851-ea51-47da-878a-1a8e28aa822e"
+      ></script>
     </html>
   );
 }
