@@ -1,7 +1,8 @@
 import MainContact from "@/components/contact/main-contact";
+import { PRODUCTION_SITE_URL } from "@/lib/utils";
 import { Metadata } from "next";
 
-import contactOg from "@/assets/og-images/contact.webp";
+const ogPreviewImage = PRODUCTION_SITE_URL + "/og-images" + "/contact.webp";
 
 export const metadata: Metadata = {
   title: "Contact | Mobin - Full Stack Developer & Mobile App Developer",
@@ -22,12 +23,12 @@ export const metadata: Metadata = {
     title: "Contact | Mobin - Full Stack Developer & Mobile App Developer",
     description:
       "Reach out to Mobin for project inquiries, collaborations, or questions about web and mobile development.",
-    url: "https://mobin.dev/contact",
+    url: `${PRODUCTION_SITE_URL}/contact`,
     siteName: "Mobin Portfolio",
     type: "website",
     images: [
       {
-        url: contactOg.src,
+        url: ogPreviewImage,
         width: 1200,
         height: 630,
         alt: "Mobin Uddin | Full Stack & Mobile App Developer - Contact Page",
@@ -39,11 +40,11 @@ export const metadata: Metadata = {
     title: "Contact | Mobin - Full Stack Developer & Mobile App Developer",
     description:
       "Get in touch with Mobin for collaborations, projects, or questions about web and mobile development.",
-    images: [contactOg.src],
+    images: [ogPreviewImage],
     creator: "@MobinRayhan",
   },
   other: {
-    "og:image": contactOg.src,
+    "og:image": ogPreviewImage,
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt":

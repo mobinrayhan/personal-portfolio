@@ -1,7 +1,8 @@
 import ProjectMain from "@/components/projects/project-main";
+import { PRODUCTION_SITE_URL } from "@/lib/utils";
 import { Metadata } from "next";
 
-import projectsOg from "@/assets/og-images/projects.webp";
+const ogPreviewImage = PRODUCTION_SITE_URL + "/og-images" + "/projects.webp";
 
 export const metadata: Metadata = {
   title: "Projects | Full Stack Developer & Mobile App Developer",
@@ -25,12 +26,12 @@ export const metadata: Metadata = {
     title: "Projects | Full Stack Developer & Mobile App Developer",
     description:
       "Explore my portfolio of web and mobile applications, showcasing modern technologies, clean architecture, and responsive design.",
-    url: "https://mobin.dev/projects",
+    url: `${PRODUCTION_SITE_URL}/projects`,
     siteName: "Mobin Portfolio",
     type: "website",
     images: [
       {
-        url: projectsOg.src,
+        url: ogPreviewImage,
         width: 1200,
         height: 630,
         alt: "Projects - Full Stack Developer & Mobile App Developer",
@@ -42,11 +43,11 @@ export const metadata: Metadata = {
     title: "Projects | Full Stack Developer & Mobile App Developer",
     description:
       "Explore my portfolio of web and mobile applications, showcasing modern technologies, clean architecture, and responsive design.",
-    images: [projectsOg.src],
+    images: [ogPreviewImage],
     creator: "@MobinRayhan",
   },
   other: {
-    "og:image": projectsOg.src,
+    "og:image": ogPreviewImage,
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "Projects - Full Stack Developer & Mobile App Developer",

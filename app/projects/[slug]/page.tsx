@@ -2,13 +2,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
 import { projectsData } from "@/data/projects";
+import { PRODUCTION_SITE_URL } from "@/lib/utils";
 import { ArrowLeft, ExternalLink, Github, Tag } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import defaultOg from "@/assets/og-images/root-facebook.webp";
+const ogPreviewImage =
+  PRODUCTION_SITE_URL + "/og-images" + "/root-facebook.webp";
 
 interface ProjectPageProps {
   params: { slug: string };
@@ -26,20 +28,20 @@ export async function generateMetadata({
       openGraph: {
         title: "Project Not Found",
         description: "The project you are looking for does not exist.",
-        images: ["https://mobin.dev/og/default.png"], // ✅ fallback OG image
+        images: [ogPreviewImage],
       },
       twitter: {
         card: "summary_large_image",
         title: "Project Not Found",
         description: "The project you are looking for does not exist.",
-        images: [defaultOg.src],
+        images: [ogPreviewImage],
       },
     };
   }
 
   const imageUrl = project.imagePath.startsWith("http")
     ? project.imagePath
-    : `https://mobin.dev${project.imagePath}`;
+    : `${PRODUCTION_SITE_URL}${project.imagePath}`;
 
   return {
     title: project.title,
@@ -47,7 +49,7 @@ export async function generateMetadata({
     openGraph: {
       title: project.title,
       description: project.description,
-      url: `https://mobin.dev/projects/${params.slug}`,
+      url: `${PRODUCTION_SITE_URL}/projects/${params.slug}`,
       siteName: "Mobin Portfolio",
       type: "website",
       images: [

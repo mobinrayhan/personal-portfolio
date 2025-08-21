@@ -1,3 +1,4 @@
+import { PRODUCTION_SITE_URL } from "@/lib/utils";
 import { SiteData } from "./types";
 
 export const siteData: SiteData = {
@@ -5,7 +6,7 @@ export const siteData: SiteData = {
   title: "Full Stack Developer & Mobile App Developer",
   description:
     "Passionate full-stack developer specializing in modern web technologies, creating exceptional user experiences and scalable applications.",
-  url: "https://alexjohnson.dev", // TODO: Replace with actual domain
+  url: PRODUCTION_SITE_URL,
   navigation: [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
@@ -21,7 +22,7 @@ export const siteData: SiteData = {
       href: "https://www.linkedin.com/in/rayhanuddinmobin",
       icon: "Linkedin",
     },
-    { name: "Email", href: "mailto:hello@alexjohnson.dev", icon: "Mail" },
+    { name: "Email", href: "mailto:contact@mobin.dev", icon: "Mail" },
     {
       name: "Instagram",
       href: "https://www.instagram.com/mobin606272",

@@ -1,12 +1,14 @@
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { siteData } from "@/data/site";
+import { PRODUCTION_SITE_URL } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/theme-provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-import rootOg from "@/assets/og-images/root-facebook.webp";
+const ogPreviewImage =
+  PRODUCTION_SITE_URL + "/og-images" + "/root-facebook.webp";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
     siteName: siteData.name,
     images: [
       {
-        url: rootOg.src,
+        url: ogPreviewImage,
         width: 1200,
         height: 630,
         alt: siteData.name,
@@ -45,11 +47,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteData.name,
     description: siteData.description,
-    images: [rootOg.src],
+    images: [ogPreviewImage],
     creator: "@MobinRayhan",
   },
   other: {
-    "og:image": rootOg.src,
+    "og:image": ogPreviewImage,
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": siteData.name,

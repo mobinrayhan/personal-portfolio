@@ -1,11 +1,12 @@
 import myImage from "@/assets/my-fav.webp";
 import { Section } from "@/components/ui/section";
 import { aboutData } from "@/data/about";
+import { PRODUCTION_SITE_URL } from "@/lib/utils";
 import { Award, Coffee, Heart, User } from "lucide-react";
 import { Metadata } from "next";
 import Image from "next/image";
 
-import aboutMeOg from "@/assets/og-images/about-me.webp";
+const ogPreviewImage = PRODUCTION_SITE_URL + "/og-images" + "/about-me.webp";
 
 export const metadata: Metadata = {
   title: "About | Mobin - Full Stack Developer & Mobile App Developer",
@@ -28,12 +29,12 @@ export const metadata: Metadata = {
     title: "About | Mobin - Full Stack Developer & Mobile App Developer",
     description:
       "Discover Mobin's background, skills, and professional journey as a Full Stack and Mobile App Developer.",
-    url: "https://mobin.dev/about",
+    url: `${PRODUCTION_SITE_URL}/about`,
     siteName: "Mobin Portfolio",
     type: "website",
     images: [
       {
-        url: aboutMeOg.src,
+        url: ogPreviewImage,
         width: 1200,
         height: 630,
         alt: "About Mobin - Full Stack Developer & Mobile App Developer",
@@ -45,11 +46,11 @@ export const metadata: Metadata = {
     title: "About | Mobin - Full Stack Developer & Mobile App Developer",
     description:
       "Discover Mobin's background, skills, and professional journey as a Full Stack and Mobile App Developer.",
-    images: [aboutMeOg.src],
+    images: [ogPreviewImage],
     creator: "@MobinRayhan",
   },
   other: {
-    "og:image": aboutMeOg.src,
+    "og:image": ogPreviewImage,
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt": "About Mobin - Full Stack Developer & Mobile App Developer",

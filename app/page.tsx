@@ -1,7 +1,9 @@
 import HomePage from "@/components/home/home-main";
+import { PRODUCTION_SITE_URL } from "@/lib/utils";
 import { Metadata } from "next";
 
-import homeOg from "@/assets/og-images/root-facebook.webp";
+const ogPreviewImage =
+  PRODUCTION_SITE_URL + "/og-images" + "/root-facebook.webp";
 
 export const metadata: Metadata = {
   title: "Mobin | Full Stack Developer & Mobile App Developer",
@@ -26,12 +28,12 @@ export const metadata: Metadata = {
     title: "Mobin | Full Stack Developer & Mobile App Developer",
     description:
       "Discover Mobin’s portfolio and projects. I build web and mobile applications using modern technologies with clean, scalable code.",
-    url: "https://mobin.dev",
+    url: PRODUCTION_SITE_URL,
     siteName: "Mobin Portfolio",
     type: "website",
     images: [
       {
-        url: homeOg.src,
+        url: ogPreviewImage,
         width: 1200,
         height: 630,
         alt: "Mobin Uddin | Full Stack & Mobile App Developer - Portfolio & Projects",
@@ -43,11 +45,11 @@ export const metadata: Metadata = {
     title: "Mobin | Full Stack Developer & Mobile App Developer",
     description:
       "Explore Mobin’s portfolio and projects. I build modern, scalable web and mobile applications.",
-    images: [homeOg.src],
+    images: [ogPreviewImage],
     creator: "@MobinRayhan",
   },
   other: {
-    "og:image": homeOg.src,
+    "og:image": ogPreviewImage,
     "og:image:width": "1200",
     "og:image:height": "630",
     "og:image:alt":
