@@ -8,6 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import defaultOg from "@/assets/og-images/root-facebook.webp";
+
 interface ProjectPageProps {
   params: { slug: string };
 }
@@ -20,8 +22,24 @@ export async function generateMetadata({
   if (!project) {
     return {
       title: "Project Not Found",
+      description: "The project you are looking for does not exist.",
+      openGraph: {
+        title: "Project Not Found",
+        description: "The project you are looking for does not exist.",
+        images: ["https://mobin.dev/og/default.png"], // ✅ fallback OG image
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: "Project Not Found",
+        description: "The project you are looking for does not exist.",
+        images: [defaultOg.src],
+      },
     };
   }
+
+  const imageUrl = project.imagePath.startsWith("http")
+    ? project.imagePath
+    : `https://mobin.dev${project.imagePath}`;
 
   return {
     title: project.title,
@@ -29,7 +47,30 @@ export async function generateMetadata({
     openGraph: {
       title: project.title,
       description: project.description,
-      images: [project.imagePath],
+      url: `https://mobin.dev/projects/${params.slug}`,
+      siteName: "Mobin Portfolio",
+      type: "website",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description: project.description,
+      images: [imageUrl],
+      creator: "@MobinRayhan",
+    },
+    other: {
+      "og:image": imageUrl,
+      "og:image:width": "1200",
+      "og:image:height": "630",
+      "og:image:alt": project.title,
     },
   };
 }

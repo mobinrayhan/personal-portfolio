@@ -8,6 +8,8 @@ import {
 } from "@/data/experience";
 import { Metadata } from "next";
 
+import experienceOg from "@/assets/og-images/experience.webp";
+
 export const metadata: Metadata = {
   title: "Experience | Full Stack Developer & Mobile App Developer",
   description:
@@ -33,6 +35,28 @@ export const metadata: Metadata = {
     url: "https://mobin.dev/experience",
     siteName: "Mobin Portfolio",
     type: "website",
+    images: [
+      {
+        url: experienceOg.src,
+        width: 1200,
+        height: 630,
+        alt: "Mobin Uddin | Full Stack & Mobile App Developer - Experience Highlights",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Experience | Full Stack Developer & Mobile App Developer",
+    description:
+      "Explore my career, professional experience, and projects as a Full Stack and Mobile App Developer.",
+    images: [experienceOg.src],
+    creator: "@MobinRayhan",
+  },
+  other: {
+    "og:image": experienceOg.src,
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "Experience | Full Stack Developer & Mobile App Developer",
   },
 };
 

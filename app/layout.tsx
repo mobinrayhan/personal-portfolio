@@ -6,6 +6,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+import rootOg from "@/assets/og-images/root-facebook.webp";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
     siteName: siteData.name,
     images: [
       {
-        url: "/images/og-image.jpg",
+        url: rootOg.src,
         width: 1200,
         height: 630,
         alt: siteData.name,
@@ -43,8 +45,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteData.name,
     description: siteData.description,
-    images: ["/images/og-image.jpg"],
-    creator: "@alexjohnson",
+    images: [rootOg.src],
+    creator: "@MobinRayhan",
+  },
+  other: {
+    "og:image": rootOg.src,
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": siteData.name,
   },
   robots: {
     index: true,

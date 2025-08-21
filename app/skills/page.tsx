@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { Metadata } from "next";
 
+import skillsOg from "@/assets/og-images/skils.webp";
+
 export const metadata: Metadata = {
   title: "Skills | Full Stack Developer & Mobile App Developer",
   description:
@@ -36,6 +38,28 @@ export const metadata: Metadata = {
     url: "https://mobin.dev/skills",
     siteName: "Mobin Portfolio",
     type: "website",
+    images: [
+      {
+        url: skillsOg.src,
+        width: 1200,
+        height: 630,
+        alt: "Skills - Full Stack Developer & Mobile App Developer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Skills | Full Stack Developer & Mobile App Developer",
+    description:
+      "Technologies and tools I use to create modern, user-friendly, and scalable web and mobile applications.",
+    images: [skillsOg.src],
+    creator: "@MobinRayhan",
+  },
+  other: {
+    "og:image": skillsOg.src,
+    "og:image:width": "1200",
+    "og:image:height": "630",
+    "og:image:alt": "Skills - Full Stack Developer & Mobile App Developer",
   },
 };
 
