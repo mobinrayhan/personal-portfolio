@@ -13,13 +13,14 @@ const ogPreviewImage =
   PRODUCTION_SITE_URL + "/og-images" + "/root-facebook.webp";
 
 interface ProjectPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: ProjectPageProps): Promise<Metadata> {
-  const project = projectsData.projects.find((p) => p.id === params.slug);
+  const { slug } = await params;
+  const project = projectsData.projects.find((p) => p.id === slug);
 
   if (!project) {
     return {
@@ -49,7 +50,7 @@ export async function generateMetadata({
     openGraph: {
       title: project.title,
       description: project.description,
-      url: `${PRODUCTION_SITE_URL}/projects/${params.slug}`,
+      url: `${PRODUCTION_SITE_URL}/projects/${slug}`,
       siteName: "Mobin Portfolio",
       type: "website",
       images: [
@@ -83,8 +84,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = projectsData.projects.find((p) => p.id === params.slug);
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { slug } = await params;
+  const project = projectsData.projects.find((p) => p.id === slug);
 
   if (!project) {
     notFound();
