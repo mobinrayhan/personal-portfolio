@@ -1,29 +1,49 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   eslint: {
-//     ignoreDuringBuilds: true,
-//   },
-//   images: { unoptimized: true },
-// };
-
-// module.exports = nextConfig;
-
-// next.config.mjs
-
 import withPWA from "next-pwa";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true, // Enable React strict mode for improved error handling
-  swcMinify: true, // Enable SWC minification for improved performance
+  reactStrictMode: true,
+  swcMinify: true,
   compiler: {
-    removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
+    removeConsole: process.env.NODE_ENV !== "development",
   },
 };
 
+const runtimeCaching = [
+  {
+    urlPattern: /^https:\/\/mobin\.dev\/.*\.(png|jpg|jpeg|webp|svg|gif|ico)$/,
+    handler: "CacheFirst",
+    options: {
+      cacheName: "image-cache",
+      expiration: {
+        maxEntries: 100,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+      },
+      cacheableResponse: {
+        statuses: [0, 200],
+      },
+    },
+  },
+  {
+    urlPattern: /^https:\/\/mobin\.dev\/_next\/image\?.*$/,
+    handler: "CacheFirst",
+    options: {
+      cacheName: "next-image-cache",
+      expiration: {
+        maxEntries: 50,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+      },
+      cacheableResponse: {
+        statuses: [0, 200],
+      },
+    },
+  },
+];
+
 export default withPWA({
-  dest: "public", // destination directory for the PWA files
-  disable: process.env.NODE_ENV === "development", // disable PWA in the development environment
-  register: true, // register the PWA service worker
-  skipWaiting: true, // skip waiting for service worker activation
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+  register: true,
+  skipWaiting: true,
+  runtimeCaching,
 })(nextConfig);
