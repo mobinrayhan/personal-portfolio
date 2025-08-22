@@ -1,71 +1,40 @@
-import withPWA from "next-pwa";
+import withPWA from "@ducanh2912/next-pwa";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
-  compiler: {
-    removeConsole: process.env.NODE_ENV !== "development",
-  },
-};
-
-export default withPWA({
+const nextConfig = withPWA({
   dest: "public",
-  disable: process.env.NODE_ENV === "development",
   register: true,
   skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
+  buildExcludes: [/middleware-manifest.json$/],
   runtimeCaching: [
-    // Cache static Next.js assets (JS, CSS, etc.)
     {
-      urlPattern: /^https:\/\/mobin\.dev\/_next\/static\/.*/i,
+      urlPattern: /^https:\/\/mobin\.dev\/.*\.(png|jpg|jpeg|webp|svg)$/,
       handler: "CacheFirst",
       options: {
-        cacheName: "static-resources",
-        expiration: {
-          maxEntries: 200,
-          maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
-        },
-        cacheableResponse: { statuses: [0, 200] },
+        cacheName: "external-images-cache",
+        expiration: { maxEntries: 100, maxAgeSeconds: 60 * 60 * 24 * 30 },
       },
     },
-    // Cache HTML pages
     {
-      urlPattern: /^https:\/\/mobin\.dev\/.*$/i,
+      urlPattern: /^https:\/\/mobin\.dev\/.*$/,
       handler: "NetworkFirst",
       options: {
-        cacheName: "html-cache",
-        networkTimeoutSeconds: 3,
-        expiration: {
-          maxEntries: 50,
-          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
-        },
-        cacheableResponse: { statuses: [0, 200] },
+        cacheName: "external-api-cache",
+        networkTimeoutSeconds: 10,
+        expiration: { maxEntries: 50, maxAgeSeconds: 60 * 60 * 24 },
       },
     },
-    // Cache Images
     {
-      urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i,
-      handler: "CacheFirst",
-      options: {
-        cacheName: "image-cache",
-        expiration: {
-          maxEntries: 200,
-          maxAgeSeconds: 60 * 24 * 60 * 60, // 60 days
-        },
-        cacheableResponse: { statuses: [0, 200] },
-      },
-    },
-    // Cache Fonts
-    {
-      urlPattern: /^https:\/\/fonts\.(?:gstatic|googleapis)\.com\/.*/i,
-      handler: "CacheFirst",
-      options: {
-        cacheName: "font-cache",
-        expiration: {
-          maxEntries: 30,
-          maxAgeSeconds: 365 * 24 * 60 * 60,
-        },
-      },
+      urlPattern: /^https:\/\/your-app-domain\.com\/_next\/static\/.*/,
+      handler: "StaleWhileRevalidate",
+      options: { cacheName: "next-static-cache" },
     },
   ],
-})(nextConfig);
+});
+
+export default {
+  ...nextConfig,
+  reactStrictMode: true,
+  images: { domains: ["mobin.dev"] },
+};
