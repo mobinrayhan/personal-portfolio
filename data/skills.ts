@@ -8,7 +8,18 @@ export const skillsData: SkillsData = {
     },
     {
       name: "Frontend",
-      skills: ["HTML", "CSS", "Tailwind", "MUI", "React", "Next.js", "Astro"],
+      skills: [
+        "HTML",
+        "CSS",
+        "Tailwind",
+        "MUI",
+        "React",
+        "Next.js",
+        "Astro",
+        "Progressive Web Apps",
+        "Service Workers",
+        "Web App Manifest",
+      ],
     },
     {
       name: "Backend",
