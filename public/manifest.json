@@ -1,6 +1,6 @@
 {
   "name": "Mobin | Full Stack Web And Mobile App Developer",
-  "short_name": "mobin-fullstack-web-and-mobile-app-dev",
+  "short_name": "Mobin",
   "theme_color": "#35155D",
   "background_color": "#ffffff",
   "display": "standalone",
@@ -62,6 +62,5 @@
       "type": "image/png",
       "purpose": "maskable any"
     }
-  ],
-  "splash_pages": null
+  ]
 }
