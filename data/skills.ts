@@ -42,6 +42,7 @@ export const skillsData: SkillsData = {
         "CI/CD (Jenkins, GitHub Actions)",
         "Docker",
         "Kubernetes",
+        "pm2",
       ],
     },
     {
