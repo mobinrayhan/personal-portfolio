@@ -1,0 +1,95 @@
+name: "Deploy Mobin.Dev To VPS 🧨"
+on:
+  push:
+    branches: ["main"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Checking Out Repo
+        uses: actions/checkout@v4
+
+      - name: Install Deps
+        run: npm ci
+
+      - name: Check Linting
+        id: lint-checking
+        run: |
+          npm run lint
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checking Out Repo
+        uses: actions/checkout@v4
+
+      - name: Install Deps
+        run: npm ci
+
+      - name: Build Project
+        run: npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            PROJECT_DIR="/www/wwwroot/mobin-personal-portfolio"
+            PROJECT_REPO="https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/mobinrayhan/personal-portfolio.git"
+
+            echo "📁 Ensuring project directory exists..."
+            if [ ! -d "$PROJECT_DIR" ]; then
+              mkdir -p "$PROJECT_DIR"
+            fi
+
+            cd "$PROJECT_DIR"
+
+            if [ ! -d ".git" ]; then
+              echo "🔁 Cloning repository..."
+              git clone "$PROJECT_REPO" .
+            else
+              echo "🔄 Pulling latest changes..."
+              git config --global --add safe.directory "$PROJECT_DIR"
+              git pull "$PROJECT_REPO"
+            fi
+
+            echo "🧹 Cleaning up .next..."
+            rm -rf .next
+
+            NODEJS_BIN="/www/server/nodejs/v24.4.1/bin"
+            export PATH=$NODEJS_BIN:$PATH
+            export PATH=$(npm bin -g):$PATH
+
+            echo "📦 Installing dependencies..."
+            npm ci
+
+            echo "🔨 Building project..."
+            npm run build
+
+            APP_NAME="mobin-personal-portfolio"
+
+            if command -v pm2 >/dev/null 2>&1; then
+              if pm2 list | grep -q "$APP_NAME"; then
+                echo "🔁 Restarting existing PM2 app"
+                pm2 restart "$APP_NAME"
+              else
+                echo "🆕 Starting new PM2 app"
+                pm2 start npm --name "$APP_NAME" -- start
+              fi
+            else
+              echo "❌ PM2 not found in PATH"
+            fi
+            echo "🧼 Clearing nginx proxy cache..."
+            sudo rm -rf /www/server/nginx/proxy_cache_dir/* || echo "⚠️ Failed to clear cache"
+
+            echo "✅ Deployment complete"
