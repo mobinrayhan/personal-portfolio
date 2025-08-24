@@ -11,7 +11,7 @@ import { contactData } from "@/data/contact";
 import * as Icons from "lucide-react";
 import { Clock, Copy, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 const initialState: InitialState = {
   status: "idle",
@@ -19,11 +19,13 @@ const initialState: InitialState = {
 };
 
 export default function MainContact() {
+  const [isCopied, setIsCopied] = useState<boolean>(false);
   const [state, formAction, pending] = useActionState(sendMail, initialState);
 
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(contactData.email);
+      setIsCopied(true);
     } catch (err) {
       console.error("Failed to copy email:", err);
     }
@@ -65,10 +67,18 @@ export default function MainContact() {
                       variant="ghost"
                       size="sm"
                       onClick={copyEmail}
-                      className="p-0 h-auto text-electric-600 hover:text-electric-700"
+                      className={`p-0 h-auto ${
+                        isCopied
+                          ? "text-green-600 hover:text-green-700"
+                          : "text-electric-600 hover:text-electric-700"
+                      }`}
                     >
-                      <Copy className="w-3 h-3 mr-1" />
-                      Copy
+                      {isCopied ? (
+                        <Icons.CheckCheck className="w-3 h-3 mr-1" />
+                      ) : (
+                        <Copy className="w-3 h-3 mr-1" />
+                      )}
+                      {isCopied ? "Copied" : "Copy"}
                     </Button>
                   </div>
                 </div>
