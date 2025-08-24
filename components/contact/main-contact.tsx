@@ -1,5 +1,7 @@
 "use client";
 
+import { sendMail } from "@/actions/contactAction";
+import { InitialState } from "@/app/contact/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,52 +9,25 @@ import { Section } from "@/components/ui/section";
 import { Textarea } from "@/components/ui/textarea";
 import { contactData } from "@/data/contact";
 import * as Icons from "lucide-react";
-import { Check, Clock, Copy, Mail, MapPin } from "lucide-react";
+import { Clock, Copy, Mail, MapPin } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useActionState } from "react";
+
+const initialState: InitialState = {
+  status: "idle",
+  message: "",
+};
 
 export default function MainContact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
-  const [emailCopied, setEmailCopied] = useState(false);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus("success");
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setSubmitStatus("idle"), 3000);
-    }, 1000);
-  };
+  const [state, formAction, pending] = useActionState(sendMail, initialState);
 
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(contactData.email);
-      setEmailCopied(true);
-      setTimeout(() => setEmailCopied(false), 2000);
     } catch (err) {
       console.error("Failed to copy email:", err);
     }
   };
-
-  const isFormValid = formData.name && formData.email && formData.message;
 
   return (
     <>
@@ -92,17 +67,8 @@ export default function MainContact() {
                       onClick={copyEmail}
                       className="p-0 h-auto text-electric-600 hover:text-electric-700"
                     >
-                      {emailCopied ? (
-                        <>
-                          <Check className="w-3 h-3 mr-1" />
-                          Copied!
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-3 h-3 mr-1" />
-                          Copy
-                        </>
-                      )}
+                      <Copy className="w-3 h-3 mr-1" />
+                      Copy
                     </Button>
                   </div>
                 </div>
@@ -170,15 +136,15 @@ export default function MainContact() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Server Action Form */}
+            <form action={formAction} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="name">{contactData.formFields.name}</Label>
                 <Input
+                  disabled={pending}
                   id="name"
                   name="name"
                   type="text"
-                  value={formData.name}
-                  onChange={handleInputChange}
                   required
                   className="transition-colors focus:border-electric-600"
                 />
@@ -187,11 +153,10 @@ export default function MainContact() {
               <div className="space-y-2">
                 <Label htmlFor="email">{contactData.formFields.email}</Label>
                 <Input
+                  disabled={pending}
                   id="email"
                   name="email"
                   type="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
                   required
                   className="transition-colors focus:border-electric-600"
                 />
@@ -202,11 +167,10 @@ export default function MainContact() {
                   {contactData.formFields.message}
                 </Label>
                 <Textarea
+                  disabled={pending}
                   id="message"
                   name="message"
                   rows={5}
-                  value={formData.message}
-                  onChange={handleInputChange}
                   required
                   className="transition-colors focus:border-electric-600 resize-none"
                   placeholder="Tell me about your project or just say hello..."
@@ -215,26 +179,27 @@ export default function MainContact() {
 
               <Button
                 type="submit"
-                disabled={!isFormValid || isSubmitting}
+                disabled={pending}
                 className="w-full btn-electric"
                 size="lg"
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {pending ? "Sending..." : "Send Message"}
               </Button>
 
-              {submitStatus === "success" && (
+              {state.status === "success" && (
                 <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
                   <p className="text-green-800 dark:text-green-200 text-sm">
-                    Thank you for your message! I will get back to you soon.
+                    {state.message ||
+                      "✅ Thank you for your message! I will get back to you soon."}
                   </p>
                 </div>
               )}
 
-              {submitStatus === "error" && (
+              {state.status === "error" && (
                 <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
                   <p className="text-red-800 dark:text-red-200 text-sm">
-                    Something went wrong. Please try again or contact me
-                    directly via email.
+                    {state.message ||
+                      "❌ Something went wrong. Please try again or contact me directly via email."}
                   </p>
                 </div>
               )}

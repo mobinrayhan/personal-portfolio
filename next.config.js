@@ -32,9 +32,17 @@ const nextConfig = withPWA({
     },
   ],
 });
+//
 
 export default {
   ...nextConfig,
   reactStrictMode: true,
   images: { domains: ["mobin.dev"] },
+  env: {
+    SMTP_HOST: "smtp.gmail.com",
+    SMTP_PORT: 587,
+    SMTP_USER: "rayhanuddinmobin2006@gmail.com",
+    SMTP_PASSWORD: `vizu zvhz rslm kavh`,
+    FROM_EMAIL: `rayhanuddinmobin2006@gmail.com`,
+  },
 };

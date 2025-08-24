@@ -52,6 +52,11 @@ export const metadata: Metadata = {
   },
 };
 
+export interface InitialState {
+  status: "idle" | "success" | "error";
+  message: string;
+}
+
 export default function ContactPage() {
   return <MainContact />;
 }
