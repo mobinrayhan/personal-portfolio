@@ -7,9 +7,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const ogPreviewImage =
-  PRODUCTION_SITE_URL + "/og-images" + "/root-facebook.webp";
-
+const ogPreviewImage = PRODUCTION_SITE_URL + "/og-images/root-facebook.webp";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -68,12 +66,21 @@ export const metadata: Metadata = {
     },
   },
   manifest: "/manifest.json",
-  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#fff" }],
-  viewport:
-    "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
   icons: [
     { rel: "apple-touch-icon", url: "icons/icon-128x128.png" },
     { rel: "icon", url: "icons/icon-128x128.png" },
+  ],
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  minimumScale: 1,
+  userScalable: true,
+  viewportFit: "cover",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#fff" },
+    { media: "(prefers-color-scheme: light)", color: "#3b82f6" },
   ],
 };
 
@@ -87,7 +94,6 @@ export default function RootLayout({
       <head>
         <link rel="canonical" href={siteData.url} />
         <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#3b82f6" />
       </head>
       <body className={inter.className}>
         <ThemeProvider defaultTheme="dark" storageKey="portfolio-theme">
@@ -102,7 +108,7 @@ export default function RootLayout({
         defer
         src="https://umami-stats.editors.academy/script.js"
         data-website-id="aeaa6851-ea51-47da-878a-1a8e28aa822e"
-      ></script>
+      />
     </html>
   );
 }
